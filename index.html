@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Панель управления Аудитора</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Unbounded:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== ШАПКА ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <span class="logo-icon">◈</span>
+        <div>
+          <div class="logo-title">Панель управления</div>
+          <div class="logo-subtitle">Аудитора</div>
+        </div>
+      </div>
+      <div class="header-time" id="headerClock"></div>
+    </div>
+  </header>
+
+  <!-- ===== КОНТЕНТ ===== -->
+  <main class="main-grid">
+
+    <!-- БЛОК 1: СТАТУСЫ -->
+    <section class="card card--statuses">
+      <div class="card-header">
+        <span class="card-num">01</span>
+        <h2 class="card-title">Статусы в аудитории</h2>
+      </div>
+      <!-- Список рендерится JS-ом из localStorage -->
+      <div class="status-list" id="statusList"></div>
+      <!-- Добавление нового статуса -->
+      <div class="status-add-row">
+        <input type="text" id="statusNewInput" class="field-input" placeholder="Новый статус..." maxlength="100" />
+        <button class="btn btn--add" onclick="addStatus()">+ Добавить</button>
+      </div>
+    </section>
+
+    <!-- БЛОК 2: КОНВЕРТАЦИЯ ВРЕМЕНИ -->
+    <section class="card card--time">
+      <div class="card-header">
+        <span class="card-num">02</span>
+        <h2 class="card-title">Конвертация времени Naumen</h2>
+      </div>
+      <p class="card-hint">Формат: <code>02.03.2026 09:00</code> — вставьте или нажмите Enter</p>
+      <div class="input-row">
+        <input type="text" id="timeInput" class="field-input" placeholder="02.03.2026 09:00" maxlength="16" />
+      </div>
+      <div class="result-row" id="timeResultRow" style="display:none">
+        <span class="result-label">Результат:</span>
+        <code class="result-value" id="timeResult"></code>
+      </div>
+      <div class="toast" id="timeToast">Скопировано!</div>
+    </section>
+
+    <!-- БЛОК 3: ФИО -->
+    <section class="card card--fio">
+      <div class="card-header">
+        <span class="card-num">03</span>
+        <h2 class="card-title">Извлечение ФИО</h2>
+      </div>
+      <p class="card-hint">Вставьте текст — ФИО извлекается автоматически</p>
+      <textarea id="fioInput" class="field-textarea" placeholder="141_Анатольев&#10;Имя Даниил&#10;Отчество Валерьевич_МОЕ_33521" rows="4"></textarea>
+      <div class="result-row" id="fioResultRow" style="display:none">
+        <span class="result-label">ФИО:</span>
+        <code class="result-value" id="fioResult"></code>
+      </div>
+      <div class="toast" id="fioToast">Скопировано!</div>
+    </section>
+
+    <!-- БЛОК 4: КЛЮЧ ЗВОНКА -->
+    <section class="card card--call">
+      <div class="card-header">
+        <span class="card-num">04</span>
+        <h2 class="card-title">Извлечение ключа звонка</h2>
+      </div>
+      <p class="card-hint">Вставьте ссылку с <code>session_id=</code> — срабатывает автоматически при вставке</p>
+      <div class="input-row">
+        <input type="text" id="callInput" class="field-input" placeholder="http://10.133.77.158:8080/fx/callrecord?session_id=..." />
+      </div>
+      <div class="result-row" id="callResultRow" style="display:none">
+        <span class="result-label">Ключ:</span>
+        <code class="result-value" id="callResult"></code>
+      </div>
+      <div class="toast" id="callToast">Скопировано!</div>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
