@@ -440,3 +440,173 @@ body {
   border-color: var(--red);
   background: rgba(248,113,113,0.07);
 }
+
+/* =====================================================
+   МОБИЛЬНАЯ ЗАГЛУШКА
+   Показывается на экранах уже 768px.
+   Сайт полностью скрывается, заглушка — на весь экран.
+   ===================================================== */
+
+/* По умолчанию заглушка скрыта */
+.mobile-block {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Скрываем весь сайт */
+  .site-header,
+  .main-grid {
+    display: none !important;
+  }
+
+  /* Показываем заглушку */
+  .mobile-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 24px;
+    text-align: center;
+    gap: 24px;
+  }
+
+  .mobile-block__icon {
+    font-size: 52px;
+    color: var(--accent);
+    opacity: 0.7;
+    line-height: 1;
+  }
+
+  .mobile-block__title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .mobile-block__sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .mobile-block__badge {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-dim);
+    border: 1px solid rgba(232,196,74,0.2);
+    border-radius: 5px;
+    padding: 5px 12px;
+    letter-spacing: 0.1em;
+  }
+}
+
+/* =====================================================
+   ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ
+   ===================================================== */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.theme-toggle {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  color: var(--accent);
+  font-size: 16px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, border-color 0.15s, transform 0.15s;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: rgba(232,196,74,0.1);
+  border-color: var(--accent);
+  transform: rotate(20deg);
+}
+
+.theme-toggle:active {
+  transform: scale(0.9);
+}
+
+/* =====================================================
+   СВЕТЛАЯ ТЕМА
+   Переопределяем только CSS-переменные.
+   Весь остальной код работает без изменений.
+   ===================================================== */
+[data-theme="light"] {
+  --bg:           #f0f0ed;
+  --bg-card:      #fafaf8;
+  --bg-card-h:    #f4f4f0;
+  --border:       #ddddd8;
+  --border-h:     #bbbbb4;
+  --accent:       #8a6800;
+  --accent-dim:   #b08a00;
+  --text:         #1a1a18;
+  --text-muted:   #888880;
+  --text-label:   #666660;
+  --green:        #1a7a3c;
+  --red:          #c0392b;
+}
+
+/* Фоновая сетка в светлой теме — чуть темнее */
+[data-theme="light"] body {
+  background-image:
+    linear-gradient(rgba(138,104,0,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(138,104,0,0.06) 1px, transparent 1px);
+}
+
+/* Шапка в светлой теме */
+[data-theme="light"] .site-header {
+  background: rgba(250,250,248,0.95);
+}
+
+/* Карточки — чуть более выраженная тень */
+[data-theme="light"] .card {
+  box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+
+/* Поля ввода */
+[data-theme="light"] .field-input,
+[data-theme="light"] .field-textarea {
+  background: #fff;
+  color: var(--text);
+}
+
+[data-theme="light"] .field-input:focus,
+[data-theme="light"] .field-textarea:focus {
+  background: #fffef5;
+}
+
+/* Тост */
+[data-theme="light"] .toast {
+  background: var(--green);
+  color: #fff;
+}
+
+/* Кнопка добавления статуса */
+[data-theme="light"] .btn--add {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Статус-айтемы */
+[data-theme="light"] .status-item {
+  background: rgba(0,0,0,0.02);
+}
+
+[data-theme="light"] .status-item:hover {
+  background: rgba(138,104,0,0.05);
+}
