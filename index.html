@@ -6,10 +6,23 @@
   <title>Панель управления Аудитора</title>
   <link rel="stylesheet" href="style.css" />
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Unbounded:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="icon" href="Music_icon-icons.com_32px.ico" sizes="32x32">
-  <link rel="icon" href="Music_icon-icons.com_48px.ico" sizes="48x48">
 </head>
 <body>
+
+  <!-- ===== МОБИЛЬНАЯ ЗАГЛУШКА =====
+       Видна только на экранах до 768px (CSS media query).
+       На ПК полностью скрыта.
+  ===== -->
+  <div class="mobile-block">
+    <div class="mobile-block__icon">⬛</div>
+    <div class="mobile-block__title">Только для ПК</div>
+    <p class="mobile-block__sub">
+      Панель управления Аудитора<br>
+      не предназначена для мобильных устройств.<br>
+      Откройте сайт на компьютере.
+    </p>
+    <div class="mobile-block__badge">◈ Панель управления Аудитора</div>
+  </div>
 
   <!-- ===== ШАПКА ===== -->
   <header class="site-header">
@@ -21,7 +34,11 @@
           <div class="logo-subtitle">Аудитора</div>
         </div>
       </div>
-      <div class="header-time" id="headerClock"></div>
+      <div class="header-right">
+        <div class="header-time" id="headerClock"></div>
+        <!-- Переключатель темы: ☀ = светлая, ☾ = тёмная -->
+        <button class="theme-toggle" id="themeToggle" title="Переключить тему" onclick="toggleTheme()">☾</button>
+      </div>
     </div>
   </header>
 
@@ -67,7 +84,7 @@
         <h2 class="card-title">Извлечение ФИО</h2>
       </div>
       <p class="card-hint">Вставьте текст — ФИО извлекается автоматически</p>
-      <textarea id="fioInput" class="field-textarea" placeholder="123_Иванов&#10;Имя Иван&#10;Отчество Иванович_МОЕ" rows="4"></textarea>
+      <textarea id="fioInput" class="field-textarea" placeholder="141_Анатольев&#10;Имя Даниил&#10;Отчество Валерьевич_МОЕ_33521" rows="4"></textarea>
       <div class="result-row" id="fioResultRow" style="display:none">
         <span class="result-label">ФИО:</span>
         <code class="result-value" id="fioResult"></code>
@@ -83,7 +100,7 @@
       </div>
       <p class="card-hint">Вставьте ссылку с <code>session_id=</code> — срабатывает автоматически при вставке</p>
       <div class="input-row">
-        <input type="text" id="callInput" class="field-input" placeholder="http://10.133.77.158:8080/fx/callrecord?session_id=..." />
+        <input type="text" id="callInput" class="field-input" placeholder="http://10.123.12.123:0000/fx/callrecord?session_id=..." />
       </div>
       <div class="result-row" id="callResultRow" style="display:none">
         <span class="result-label">Ключ:</span>
@@ -95,5 +112,11 @@
   </main>
 
   <script src="script.js"></script>
+  <script>
+    // Выводим ошибку в консоль если открыто с телефона
+    if (window.innerWidth <= 768) {
+      console.error('ERROR: MOBILE_DEVICE_DETECTED');
+    }
+  </script>
 </body>
 </html>
