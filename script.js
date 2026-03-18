@@ -3,6 +3,42 @@
    ===================================================== */
 
 /* =================================================
+   ТЕМА: ТЁМНАЯ / СВЕТЛАЯ
+   По умолчанию — тёмная.
+   Выбор сохраняется в localStorage под ключом 'auditor_theme'.
+   ================================================= */
+
+/**
+ * Применяет тему к <html> и обновляет иконку кнопки.
+ * @param {'light'|'dark'} theme
+ */
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('themeToggle').textContent = '☀';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeToggle').textContent = '☾';
+  }
+}
+
+/** Переключает тему и сохраняет выбор в localStorage */
+function toggleTheme() {
+  const current = localStorage.getItem('auditor_theme') || 'dark';
+  const next = current === 'dark' ? 'light' : 'dark';
+  localStorage.setItem('auditor_theme', next);
+  applyTheme(next);
+}
+
+// Загружаем сохранённую тему при старте.
+// Если записи нет — остаётся тёмная (по умолчанию).
+(function initTheme() {
+  const saved = localStorage.getItem('auditor_theme');
+  if (saved === 'light') applyTheme('light');
+})();
+
+
+/* =================================================
    ЧАСЫ В ШАПКЕ
    ================================================= */
 function updateClock() {
